@@ -1,0 +1,36 @@
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 15px;
+  }
+  body {
+    min-width: 750px;
+  }
+  #map {
+    height: 100%;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  #sortable > li { 
+    margin: 5px;
+    padding: 5px;
+  }
+  .panel-heading {
+    background-color: #92B6D5;
+  }
+  .panel-collapse {
+    background-color: #f2f2f2;
+  }
+  span.glyphicon-plus {
+    color: #92B6D5;
+  }
+  span.glyphicon-remove {
+    color: #fff;
+  }
+  textarea {
+    resize : vertical;
+  }
