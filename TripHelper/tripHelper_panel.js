@@ -52,7 +52,7 @@
   function removePanel(seq) {
     var headingId = `#heading${seq}`;
     $(headingId).parent().remove();
-    if(markerMap) {
+    if(markerMap.size > 0) {
       //delete the panel marker from the map and also the markerMap.
       markerMap.get(`marker${seq}`).setMap(null);
       markerMap.delete(`marker${seq}`);

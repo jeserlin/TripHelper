@@ -28,8 +28,10 @@
     $( "#sortable" ).sortable({
       revert: true,
       stop : function() {
-        //update polyline.
-        drawPolyline();
+        if(markerMap.size > 0) {
+          //update polyline.
+          drawPolyline();
+        }
       }
     });
     $( "ul, li" ).disableSelection();
