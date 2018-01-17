@@ -11,9 +11,10 @@
   <link href="tripHelper.css" rel="stylesheet" media="screen">
 
   <!-- JS -->
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/176ff8be8a.js"></script>
   <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ti6B8D8eQxk8ZJhi8Tik0esCjddSvmY&libraries=places"></script>
   <script type="text/javascript" src="tripHelper_map.js"></script>
@@ -38,6 +39,9 @@
     $('#st1').datetimepicker();
     $('#en1').datetimepicker();
   } );
+  function directionService() {
+    
+  }
   </script>
 </head>
 <body onload="initMap()">
@@ -49,7 +53,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#ta" aria-controls="home" role="tab" data-toggle="tab">Travel Arrangements</a></li>
-        <li role="presentation"><a href="#ds" aria-controls="profile" role="tab" data-toggle="tab">Directions Service</a></li>
+        <li role="presentation"><a href="#ds" aria-controls="profile" role="tab" data-toggle="tab" onclick="directionService()">Directions Service</a></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -105,7 +109,22 @@
             </ul>
           </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="ds"></div>
+        <div role="tabpanel" class="tab-pane" id="ds">
+          <div class="col-sm-12">
+            <button class="btn" style="background-color: white">
+              <i class="fa fa-car fa-lg"></i> Driving</a>
+            </button>
+            <button class="btn" style="background-color: white">
+              <i class="fa fa-bicycle fa-lg"></i> Bicyclig</a>
+            </button>
+            <button class="btn" style="background-color: white">
+              <i class="fa fa-train fa-lg"></i> Transit</a>
+            </button>
+            <button class="btn" style="background-color: white">
+              <i class="fa fa-male fa-lg"></i> Walking</a>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
