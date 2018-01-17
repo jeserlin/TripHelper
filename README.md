@@ -9,7 +9,14 @@ Trip Helper is a site that you can easily arrange your trip.（Base on google ma
 * Javascript ES6
 * Jquery
 
-### Features:
-1.Travel Arrangements
+## Features:
 
-2.Direction Service
+### 1.Travel Arrangements
+  You can arrange your trip here.
+  Each panel respresents a location, by filling the location input in the panel there will be a marker showing on the map.
+  When you have more than one panel, the markers on the map will be connected with polyline in order.
+  You can also change the order of locations by just dragging the panel.
+  
+### 2.Direction Service
+  Once you have finished you travel arrangement, you can go to the Direction Service tab to see the transportation info.
+  The information is provided by Google map.
