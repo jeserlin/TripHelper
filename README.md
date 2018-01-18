@@ -19,4 +19,6 @@ Trip Helper is a site that you can easily arrange your trip.（Base on google ma
   
 ### 2.Direction Service
   Once you have finished you travel arrangement, you can go to the Direction Service tab to see the transportation info.
+  The origin, waypoints and the destination will be in the order of the travel arrangements that you made. 
+  Also on the left part of the page - the map will show the route of direction service for you!
   The information is provided by Google map.
