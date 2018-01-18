@@ -9,6 +9,12 @@
   #map {
     height: 100%;
   }
+  .overflow {
+    overflow: auto;
+  }
+  .capitalize {
+    text-transform: capitalize;
+  }
   ul {
     list-style-type: none;
     margin: 0;
@@ -36,4 +42,19 @@
   }
   textarea {
     resize : vertical;
+  }
+  .p-xs-top {
+    padding-top: .25em;
+  }
+  .p-sm-top {
+    padding-top: .5em;
+  }
+  .p-md-top {
+    padding-top: 1em;
+  }
+  .p-lg-top {
+    padding-top: 1.5em;
+  }
+  .p-xl-top {
+    padding-top: 3em;
   }

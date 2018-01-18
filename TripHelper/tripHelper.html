@@ -23,6 +23,8 @@
   <script>
   var map;
   var polyline;
+  var directionsService;
+  var directionsDisplay;
   //marker collector.
   var markerMap = new Map();
   $( function() {
@@ -38,9 +40,90 @@
     $( "ul, li" ).disableSelection();
     $('#st1').datetimepicker();
     $('#en1').datetimepicker();
+
   } );
-  function directionService() {
+  function travelArrangements() {
+    //clear last direction service.
+    if(directionsService && directionsDisplay) {
+      $('#dsPanelBody').html("");
+      directionsDisplay.setMap(null);
+    }
+
+    if(markerMap.size > 0) {
+      for (var value of markerMap) {
+        var marker = value[1];
+        marker.setMap(map);
+      }
+    }
+
+    if(polyline) {
+      polyline.setMap(map);
+    }
+  }
+  //click Direction Service tab to start direction service, default travel mode: driving.
+  function directionService(travelMode) {
+    //clear last direction service and remove all markers and polyline.
+    if(directionsService && directionsDisplay) {
+      $('#dsPanelBody').html("");
+      directionsDisplay.setMap(null);
+    }
     
+    if(markerMap.size > 0) {
+      for (var value of markerMap) {
+        var marker = value[1];
+        marker.setMap(null);
+      }
+    }
+
+    if(polyline) {
+      polyline.setMap(null);
+    }
+    //panel title
+    $("#dsA").text(travelMode);
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer({
+      map: map,
+      panel: document.getElementById('dsPanelBody')
+    });
+
+    //get locations order in travel arrangement.
+    var array = getOrder();
+    
+    //ori
+    var oriSeq = array[0];
+    var origin = markerMap.get(`marker${oriSeq}`).getPosition();
+
+    //destination
+    var desSeq = array[array.length -1];
+    var destination = markerMap.get(`marker${desSeq}`).getPosition();
+
+    //default travel mode: driving.
+    travelMode = travelMode.toUpperCase();
+    displayRoute(origin, destination, travelMode, directionsService, directionsDisplay);
+    //resize direction service panel.
+    resizeDsPanel();
+    //force to show direction service panel.
+    $("#dsCollapse").collapse('show');
+  }
+
+  function displayRoute(origin, destination, travelMode, service, display) {
+    service.route({
+      origin: origin,
+      destination: destination,
+      travelMode: travelMode,
+      avoidTolls: true
+    }, function(response, status) {
+      if (status === 'OK') {
+        display.setDirections(response);
+      } else {
+        $('#dsPanelBody').html("Sorry, there is no route provided.");
+      }
+    });
+  }
+  //resize direction service panel.
+  window.onresize = resizeDsPanel;
+  function resizeDsPanel() {
+    $('#dsPanelBody').height($("#map").height() - 170);
   }
   </script>
 </head>
@@ -52,8 +135,8 @@
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#ta" aria-controls="home" role="tab" data-toggle="tab">Travel Arrangements</a></li>
-        <li role="presentation"><a href="#ds" aria-controls="profile" role="tab" data-toggle="tab" onclick="directionService()">Directions Service</a></li>
+        <li role="presentation" class="active"><a href="#ta" aria-controls="home" role="tab" data-toggle="tab" onclick="travelArrangements()">Travel Arrangements</a></li>
+        <li role="presentation"><a href="#ds" aria-controls="profile" role="tab" data-toggle="tab" onclick="directionService('driving')">Directions Service</a></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -110,21 +193,32 @@
           </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="ds">
-          <div class="col-sm-12">
-            <button class="btn" style="background-color: white">
+          <div id="dsButtonGroup" class="col-sm-12 p-sm-top">
+            <button class="btn" style="background-color: white" onclick="directionService('driving')">
               <i class="fa fa-car fa-lg"></i> Driving</a>
             </button>
-            <button class="btn" style="background-color: white">
+            <button class="btn" style="background-color: white" onclick="directionService('bicycling')">
               <i class="fa fa-bicycle fa-lg"></i> Bicyclig</a>
             </button>
-            <button class="btn" style="background-color: white">
+            <button class="btn" style="background-color: white" onclick="directionService('transit')">
               <i class="fa fa-train fa-lg"></i> Transit</a>
             </button>
-            <button class="btn" style="background-color: white">
+            <button class="btn" style="background-color: white" onclick="directionService('walking')">
               <i class="fa fa-male fa-lg"></i> Walking</a>
             </button>
           </div>
+          <div class="col-sm-12 p-md-top">
+            <div id="dsPanel" class="panel-heading" role="tab">
+              <h4 class="panel-title">
+                <a id="dsA" class="capitalize" role="button" data-toggle="collapse" data-parent="#accordion" href="#dsCollapse" aria-expanded="true" aria-controls="collapseOne" ></a>
+              </h4>
+            </div>
+            <div id="dsCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="dsPanel">
+              <div id="dsPanelBody" class="panel-body overflow"></div>
+            </div>
+          </div>
         </div>
+        <a id="testA" class="capitalize"></a>
       </div>
     </div>
   </div>
