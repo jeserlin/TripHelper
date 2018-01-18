@@ -46,8 +46,11 @@
               </div>
             </li>`;
     $("#sortable").append(html);
+    $(`#st${index}`).datetimepicker();
+    $(`#en${index}`).datetimepicker();
     initPlace(index);
   }
+
   //remove panel and 
   function removePanel(seq) {
     var headingId = `#heading${seq}`;
@@ -58,4 +61,10 @@
       markerMap.delete(`marker${seq}`);
       drawPolyline();
     }
+  }
+
+  //resize direction service panel.
+  window.onresize = resizeDsPanel;
+  function resizeDsPanel() {
+    $('#dsPanelBody').height($("#map").height() - 170);
   }
