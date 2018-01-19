@@ -191,9 +191,20 @@ function travelArrangements() {
     //get locations order in travel arrangement.
     var array = getOrder();
     
-    //ori
+    //origin
     var oriSeq = array[0];
     var origin = markerMap.get(`marker${oriSeq}`).getPosition();
+
+    //waypoints
+    var waypoints = [];
+    console.log(markerMap);
+    for(var i=2; i<markerMap.size; i++) {
+      //var pointMap = new Map();
+      var point = markerMap.get(`marker${i}`).getPosition();
+      //pointMap.set("location", point);
+      waypoints.push({location: point});
+    }
+    console.log(waypoints);
 
     //destination
     var desSeq = array[array.length -1];
@@ -201,16 +212,17 @@ function travelArrangements() {
 
     //default travel mode: driving.
     travelMode = travelMode.toUpperCase();
-    displayRoute(origin, destination, travelMode, directionsService, directionsDisplay);
+    displayRoute(origin, waypoints, destination, travelMode, directionsService, directionsDisplay);
     //resize direction service panel.
     resizeDsPanel();
     //force to show direction service panel.
     $("#dsCollapse").collapse('show');
   }
   
-  function displayRoute(origin, destination, travelMode, service, display) {
+  function displayRoute(origin, waypoints, destination, travelMode, service, display) {
     service.route({
       origin: origin,
+      waypoints: waypoints,
       destination: destination,
       travelMode: travelMode,
       avoidTolls: true
