@@ -45,16 +45,21 @@ function initMap() {
       map: map,
       anchorPoint: new google.maps.Point(0, -29)
     });
+
     //change place.
     autocomplete.addListener('place_changed', function() {
       infoWindow.close();
       marker.setVisible(false);
       var place = autocomplete.getPlace();
       if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
+        $(document).keypress(function (e) {
+            if (!e.which == 13) {
+              // User entered the name of a Place that was not suggested and
+              // pressed the Enter key, or the Place Details request failed.
+              window.alert("No details available for input: '" + place.name + "'");
+              return;
+            }
+        });
       }
       // If the place has a geometry, then present it on a map.
       if (place.geometry.viewport) {
@@ -89,6 +94,7 @@ function initMap() {
       //draw polyline.
       drawPolyline();
     });
+
     marker.addListener('click', function() {
       infoWindow.open(map, marker);
     });
