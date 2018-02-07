@@ -1,3 +1,7 @@
+//---------------------------params-------------------------
+//collect directionService in transit travel mode(to control its display).
+var transitDirectionServiceArray = [];
+
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -126,10 +130,9 @@ function initMap() {
   //get order of locations.
   function getOrder() {
     var array = Array.from($("[data-seq]"), x => $(x).attr("data-seq"));
-    console.log("array------");
-    console.log(array);
     return array;
   }
+
   //draw polyline on the map.
   function drawPolyline() {
     if(polyline) {
@@ -150,28 +153,37 @@ function initMap() {
         });
     polyline.setMap(map);
   }
-//travel Arrangements tab
-function travelArrangements() {
-  //clear last direction service.
-  if(directionsService && directionsDisplay) {
-    $('#dsPanelBody').html("");
-    directionsDisplay.setMap(null);
-  }
 
-  if(markerMap.size > 0) {
-    for (var value of markerMap) {
-      var marker = value[1];
-      marker.setMap(map);
+  //travel Arrangements tab
+  function travelArrangements() {
+    transitDirectionServiceArray.forEach(function(service,index) {
+      service.setMap(null);
+    });
+    transitDirectionServiceArray = [];
+    //clear last direction service.
+    if(directionsService && directionsDisplay) {
+      $('#dsPanelBody').html("");
+      directionsDisplay.setMap(null);
+    }
+
+    if(markerMap.size > 0) {
+      for (var value of markerMap) {
+        var marker = value[1];
+        marker.setMap(map);
+      }
+    }
+
+    if(polyline) {
+      polyline.setMap(map);
     }
   }
 
-  if(polyline) {
-    polyline.setMap(map);
-  }
-}
-
   //click Direction Service tab to start direction service, default travel mode: driving.
   function directionService(travelMode) {
+    transitDirectionServiceArray.forEach(function(service,index) {
+      service.setMap(null);
+    });
+    transitDirectionServiceArray = [];
     //clear last direction service and remove all markers and polyline.
     if(directionsService && directionsDisplay) {
       $('#dsPanelBody').html("");
@@ -199,31 +211,65 @@ function travelArrangements() {
     //get locations order in travel arrangement.
     var array = getOrder();
     
-    //origin
-    var oriSeq = array[0];
-    var origin = markerMap.get(`marker${oriSeq}`).getPosition();
+    if(array.length != 1) {
+      if(travelMode == "transit" && array.length>2) {
+          //split into route without waypoints.(for travel mode : Transit)
+          var transitRoute = [];
+          for(var i=0; i<array.length-1; i++) {
+            var seq = i;
+            var route = [];
+            route.push(array[seq]);
+            route.push(array[seq+1]);
+            transitRoute.push(route);
+          }
+          for(var i=0; i<transitRoute.length; i++) {
+            var route = transitRoute[i];
+            //origin
+            var oriSeq = route[0];
+            var origin = markerMap.get(`marker${oriSeq}`).getPosition();
+            //destination seq
+            var desSeq = route[1];
+            var destination = markerMap.get(`marker${desSeq}`).getPosition();
 
-    //waypoints
-    var waypoints = [];
-    for(var i=1; i<array.length-1; i++) {
-      var seq = array[i];
-      var point = markerMap.get(`marker${seq}`).getPosition();
-      waypoints.push({location: point});
+            travelMode = travelMode.toUpperCase();
+            directionsService = new google.maps.DirectionsService;
+            directionsDisplay = new google.maps.DirectionsRenderer({
+              map: map,
+              panel: document.getElementById('dsPanelBody')
+            });
+            displayRoute(origin, null, destination, travelMode, directionsService, directionsDisplay);
+            transitDirectionServiceArray.push(directionsDisplay);
+          }
+        } else {
+          //origin
+          var oriSeq = array[0];
+          var origin = markerMap.get(`marker${oriSeq}`).getPosition();
+
+          //waypoints
+          var waypoints = [];
+          for(var i=1; i<array.length-1; i++) {
+            var seq = array[i];
+            var point = markerMap.get(`marker${seq}`).getPosition();
+            waypoints.push({location: point});
+          }
+
+          //destination
+          var desSeq = array[array.length-1];
+          var destination = markerMap.get(`marker${desSeq}`).getPosition();
+
+          //default travel mode: driving.
+          travelMode = travelMode.toUpperCase();
+          displayRoute(origin, waypoints, destination, travelMode, directionsService, directionsDisplay);
+        }
+        
+        //resize direction service panel.
+        resizeDsPanel();
+        //force to show direction service panel.
+        $("#dsCollapse").collapse('show');
+      }
     }
+    
 
-    //destination
-    var desSeq = array[array.length-1];
-    var destination = markerMap.get(`marker${desSeq}`).getPosition();
-
-    //default travel mode: driving.
-    travelMode = travelMode.toUpperCase();
-    displayRoute(origin, waypoints, destination, travelMode, directionsService, directionsDisplay);
-    //resize direction service panel.
-    resizeDsPanel();
-    //force to show direction service panel.
-    $("#dsCollapse").collapse('show');
-  }
-  
   function displayRoute(origin, waypoints, destination, travelMode, service, display) {
     service.route({
       origin: origin,
