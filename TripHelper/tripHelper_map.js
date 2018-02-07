@@ -126,6 +126,8 @@ function initMap() {
   //get order of locations.
   function getOrder() {
     var array = Array.from($("[data-seq]"), x => $(x).attr("data-seq"));
+    console.log("array------");
+    console.log(array);
     return array;
   }
   //draw polyline on the map.
@@ -203,17 +205,14 @@ function travelArrangements() {
 
     //waypoints
     var waypoints = [];
-    console.log(markerMap);
-    for(var i=2; i<markerMap.size; i++) {
-      //var pointMap = new Map();
-      var point = markerMap.get(`marker${i}`).getPosition();
-      //pointMap.set("location", point);
+    for(var i=1; i<array.length-1; i++) {
+      var seq = array[i];
+      var point = markerMap.get(`marker${seq}`).getPosition();
       waypoints.push({location: point});
     }
-    console.log(waypoints);
 
     //destination
-    var desSeq = array[array.length -1];
+    var desSeq = array[array.length-1];
     var destination = markerMap.get(`marker${desSeq}`).getPosition();
 
     //default travel mode: driving.
