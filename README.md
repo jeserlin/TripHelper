@@ -8,6 +8,7 @@ Trip Helper is a site that you can easily arrange your trip.（Base on google ma
 * Google Map API - Directions Service
 * Javascript ES6
 * Jquery
+* Bootstrap 3.3.7
 
 ## Features:
 
