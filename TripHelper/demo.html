@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- CSS -->
+  		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  		<!-- JS -->
+  		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<title>Trip Helper Demo Page</title>
+		<style type="text/css">
+		body {
+			padding-bottom: 1.5em;
+		}
+		.lightBlue {
+			color: #92B6D5;
+		}
+		.black {
+			color: black;
+		}
+		.p-lg-top {
+		    padding-top: 1.5em;
+		  }
+		</style>
+	</head>
+	<body class>
+		<div class="container">
+			<h1 class="lightBlue" style="border-bottom: #92B6D5 5px solid;">Trip Helper Demo</h1>
+			<div class="col-sm-12">
+				<a href="#travelArrangement">@Travel Arrangement</a>
+				<a href="#directionsService">@Directions Service</a>
+			</div>
+			<!-- Travel Arrangement -->
+			<h2 id="travelArrangement" class="lightBlue"># Travel Arrangement</h2>
+			<!-- Step 1 -->
+			<div class="col-sm-6 p-lg-top">
+				<div id="step1_carousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				    <li data-target="#step1_carousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#step1_carousel" data-slide-to="1"></li>
+				    <li data-target="#step1_carousel" data-slide-to="2"></li>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="img/1.png">
+				      <div class="carousel-caption black">
+				       	Complete the "Location" input.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/2.png">
+				      <div class="carousel-caption black">
+				        Others infos you can choose to complete.
+				      </div>
+				    </div>
+				  </div>
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#step1_carousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#step1_carousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			<div class="col-sm-6 p-lg-top">
+				<h4>Step 1 :</h4>
+				<p>
+					Enter the place in "Location" input, the Google Map Place API will help you with some possible places in options please choose one from below.
+					After you have finished the "Location" input, the map on the left will show the place that you chose with a marker.
+				</p>
+				<p>
+					* There are also some informations that you can complete as a note of your trip.For example, start time and end time and description. 
+				</p>
+			</div>
+			<div class="clearfix"></div>
+			<hr class="col-xs-12">
+			<!-- Step 2 -->
+			<div class="col-sm-6 col-sm-push-6 p-lg-top">
+				<div id="step2_carousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				    <li data-target="#step2_carousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#step2_carousel" data-slide-to="1"></li>
+				    <li data-target="#step2_carousel" data-slide-to="2"></li>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="img/3.png">
+				      <div class="carousel-caption black">
+				       	Press the “+” button to add panels.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/4.png">
+				      <div class="carousel-caption black">
+				        Repeat step 1 until you have finished all your places.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/5.png">
+				    </div>
+				  </div>
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#step2_carousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#step2_carousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			<div class="col-sm-6 col-sm-pull-6 p-lg-top">
+				<h4>Step 2 :</h4>
+				<p>
+					If you want to add some more locations, press the "+" button on top of the first panel. Then it will add an empty panel just after the first one.
+					Repeat step 1 until you have typed in all your places. If there is more than one marker one the map, the markse will be connected with polylines in order.
+					So that you can see if this arrangement of your trip is the best.
+				</p>
+			</div>
+			<div class="clearfix"></div>
+			<hr class="col-xs-12">
+			<!-- Step 3 -->
+			<div class="col-sm-6 p-lg-top">
+				<div id="step3_carousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				    <li data-target="#step3_carousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#step3_carousel" data-slide-to="1"></li>
+				    <li data-target="#step3_carousel" data-slide-to="2"></li>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="img/6.png">
+				    </div>
+				    <div class="item">
+				      <img src="img/7.png">
+				      <div class="carousel-caption black">
+				        Drag to re-arrange your trip!
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/8.png">
+				      <div class="carousel-caption black">
+				        Voilà!
+				      </div>
+				    </div>
+				  </div>
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#step3_carousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#step3_carousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			<div class="col-sm-6 p-lg-top">
+				<h4>Step 3 :</h4>
+				<p>
+					More places you have typed in, maybe you will want to change the order of some of the places. 
+					At this time, you can change the order of the panels by simply drag them to re-arrange.
+				</p>
+			</div>
+			<div class="clearfix"></div>
+			<hr class="col-xs-12">
+			<!-- Direction Service -->
+			<h2 id="directionsService" class="lightBlue"># Directions Service</h2>
+			<div class="col-sm-6 col-sm-push-6 p-lg-top">
+				<div id="step4_carousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				    <li data-target="#step4_carousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#step4_carousel" data-slide-to="1"></li>
+				    <li data-target="#step4_carousel" data-slide-to="2"></li>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="img/9.png">
+				      <div class="carousel-caption black">
+				        Driving.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/10.png">
+				      <div class="carousel-caption black">
+				        Bicycling.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/11.png">
+				      <div class="carousel-caption black">
+				        Transit.
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img src="img/12.png">
+				      <div class="carousel-caption black">
+				        Walking.
+				      </div>
+				    </div>
+				  </div>
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#step4_carousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#step4_carousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			<div class="col-sm-6 col-sm-pull-6 p-lg-top">
+				<h4>Step 4 :</h4>
+				<p>
+					After finishing your travel arrangement, you can go to direction service to see how to get to these places.
+					In Direction Service, there are four travel modes : Driving, Bicycling, Transit and Walking. The default mode is Driving,
+					you can change to other modes by pressing the travel mode buttons. There is one thing need to notice, in Transit mode, google map
+					doesn't support it with waypoints. But in this mode, i separete the route every two places, that is i force it to call the google map 
+					directions service serval times. For example, in Transit mode, if you have three places [A,B,C], then it will change into {[A,B],[B,C]}.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
