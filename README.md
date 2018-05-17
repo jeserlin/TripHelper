@@ -1,6 +1,6 @@
 # TripHelper
 You can also see here:<br>
-https://jeserlin.github.io/TripHelper/tripHelper.html<br>
+https://jeserlin.github.io/TripHelper/tripHelper<br>
 Trip Helper is a site that you can easily arrange your trip.（Base on google map）
 
 ## I'm using:
